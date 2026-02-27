@@ -59,3 +59,10 @@ grid on;
 title('Respuesta Temporal del Circuito RC (Entrada 5V)');
 xlabel('Tiempo (s)'); ylabel('Voltaje en el Capacitor (V)');
 legend('Caso A: R=10k\Omega', 'Caso B: R=1k\Omega');
+
+
+<div align="center">
+  <img src="grafcomp.png" width="200">
+  <br>
+  <p><i>Circuito RC.</i></p>
+</div>
