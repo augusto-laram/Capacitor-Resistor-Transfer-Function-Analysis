@@ -25,8 +25,7 @@ Se comparan dos configuraciones distintas para observar cómo la variación de l
 | :--- | :--- | :--- |
 | **Resistencia ($R$)** | $10,000 \, \Omega$ (10 kΩ) | $1,000 \, \Omega$ (1 kΩ) |
 | **Capacitor ($C$)** | $470 \times 10^{-6} \, F$ | $470 \times 10^{-6} \, F$ |
-| **Polo Teórico ($s$)** | $-0.212$ | $-2.127$ |
-| **Estabilidad** | Estable | Estable |
+
 
 ---
 
@@ -83,10 +82,36 @@ legend('Caso A: R=10k\Omega', 'Caso B: R=1k\Omega');
 
 ```
 ## 4. Visualización y Análisis de resultados
+### Análisis del mapa de polos
+Para determinar la estabilidad y la velocidad de respuesta de los sistemas, se calculó la ubicación de sus polos mediante el comando `pzmap` en MATLAB. 
 
-Aquí podemos apreciar la manera en la que se alcanza la estabilidad de nuestro sistema, podemos apreciar una clara relación entre el valor de la resistencia y el tiempo con la que alcanza la capacidad máxima del capcitor.
+* **Caso A (Polo en $s \approx -0.21$):** El polo se encuentra en el semiplano izquierdo pero muy cerca del eje imaginario (origen). Esto indica que el sistema es estable, pero su respuesta transitoria es lenta.
+* **Caso B (Polo en $s \approx -2.12$):** Al reducir la resistencia, el polo se desplaza significativamente hacia la izquierda en el eje real.
+
+<div align="center">
+  <img src="polosgraf.png" width="400">
+  <br>
+  <p><i>Mapa de polos.</i></p>
+</div>
+
+**Conclusión del Mapa de Polos:** Ambos sistemas son **absolutamente estables** ya que sus polos tienen parte real negativa. Sin embargo, la mayor distancia del polo del Caso B con respecto al eje imaginario confirma matemáticamente que este sistema alcanzará su estado estacionario con mayor rapidez que el Caso A.
+
+
+### Análisis de la Respuesta Temporal (Entrada Escalón de 5V)
+
+Se comparó la respuesta de ambos sistemas ante una entrada escalón de 5V para observar la velocidad de carga del capacitor en cada configuración. 
+
+
+
+
+* **Caso A (R=10kΩ):** Presenta una curva de ascenso lenta. El sistema tarda aproximadamente **4.7 segundos** ($\tau$) en alcanzar el 63.2% de su carga y llega a su estado estacionario cerca de los **23.5 segundos**.
+* **Caso B (R=1kΩ):** Muestra una respuesta significativamente más veloz. Al reducir la resistencia, la constante de tiempo cae a **0.47 segundos**, logrando estabilizarse en apenas **2.35 segundos**.
+  
 <div align="center">
   <img src="grafcomp.png" width="400">
   <br>
   <p><i>Gráfica comparativa.</i></p>
 </div>
+
+**Análisis de Resultados:** Ambas señales convergen exactamente al mismo valor final (5V), lo que confirma que la ganancia estática ($K$) es unitaria en ambos casos. Sin embargo, la diferencia en la pendiente de las curvas demuestra físicamente cómo el valor de la resistencia limita el flujo de corriente y, por ende, controla la velocidad de respuesta del sistema.
+
