@@ -31,8 +31,29 @@ Se comparan dos configuraciones distintas para observar cómo la variación de l
 ---
 
 ## 3. Implementación en MATLAB
+Primeramente, obtuvimos los polos de los sistemas a analizar mediante el siguiente código de MATLAB:
+```matlab
+% Parámetros del Capacitor
+C = 470e-6; 
 
-Se utilizó el siguiente script para modelar ambos sistemas y comparar su respuesta ante una entrada escalón de **5V DC**.
+% Sistema Caso A (R = 10k)
+Ra = 10000;
+tau_a = Ra * C;
+Ha = tf([1], [tau_a 1]);
+
+% Sistema Caso B (R = 1k)
+Rb = 1000;
+tau_b = Rb * C;
+Hb = tf([1], [tau_b 1]);
+
+% Generar Mapa de Polos y Ceros
+figure;
+pzmap(Ha, 'b', Hb, 'r');
+grid on;
+title('Mapa de Polos y Ceros: Caso A vs Caso B');
+legend('Polo Caso A (10k\Omega)', 'Polo Caso B (1k\Omega)');
+```
+También, se utilizó el siguiente script para modelar ambos sistemas y comparar su respuesta ante una entrada escalón de **5V DC**.
 
 ```matlab
 % Parámetros del sistema
@@ -60,9 +81,12 @@ title('Respuesta Temporal del Circuito RC (Entrada 5V)');
 xlabel('Tiempo (s)'); ylabel('Voltaje en el Capacitor (V)');
 legend('Caso A: R=10k\Omega', 'Caso B: R=1k\Omega');
 
+```
+## 4. Visualización y Análisis de resultados
 
+Aquí podemos apreciar la manera en la que se alcanza la estabilidad de nuestro sistema, podemos apreciar una clara relación entre el valor de la resistencia y el tiempo con la que alcanza la capacidad máxima del capcitor.
 <div align="center">
-  <img src="grafcomp.png" width="200">
+  <img src="grafcomp.png" width="400">
   <br>
-  <p><i>Circuito RC.</i></p>
+  <p><i>Gráfica comparativa.</i></p>
 </div>
