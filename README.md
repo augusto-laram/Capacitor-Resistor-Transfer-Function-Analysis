@@ -101,9 +101,6 @@ Para determinar la estabilidad y la velocidad de respuesta de los sistemas, se c
 
 Se comparó la respuesta de ambos sistemas ante una entrada escalón de 5V para observar la velocidad de carga del capacitor en cada configuración. 
 
-
-
-
 * **Caso A (R=10kΩ):** Presenta una curva de ascenso lenta. El sistema tarda aproximadamente **4.7 segundos** ($\tau$) en alcanzar el 63.2% de su carga y llega a su estado estacionario cerca de los **23.5 segundos**.
 * **Caso B (R=1kΩ):** Muestra una respuesta significativamente más veloz. Al reducir la resistencia, la constante de tiempo cae a **0.47 segundos**, logrando estabilizarse en apenas **2.35 segundos**.
   
@@ -115,3 +112,44 @@ Se comparó la respuesta de ambos sistemas ante una entrada escalón de 5V para 
 
 **Análisis de Resultados:** Ambas señales convergen exactamente al mismo valor final (5V), lo que confirma que la ganancia estática ($K$) es unitaria en ambos casos. Sin embargo, la diferencia en la pendiente de las curvas demuestra físicamente cómo el valor de la resistencia limita el flujo de corriente y, por ende, controla la velocidad de respuesta del sistema.
 
+## 5. Validación mediante Simulación en Proteus
+
+Para corroborar los resultados de MATLAB, se diseñó el circuito en el software Proteus utilizando componentes con valores nominales idénticos a los del modelo matemático.
+
+
+### Configuración del Experimento
+* **Componentes:** Resistencia de $1k\Omega$ y $10k\Omega$, con un capacitor de $470\mu F$.
+* **Fuente:** Voltaje DC de $5V$ mediante una entrada tipo escalón (Switch SPDT).
+* **Medición:** Se utilizó un osciloscopio digital conectado al nodo de salida ($V_c$) para capturar la curva de carga.
+
+### Análisis del Osciloscopio
+
+<div align="center">
+  <img src="10kgraf.png" width="500">
+  <br>
+  <p><i>Resistencia a 10kOhms.</i></p>
+</div>
+
+<div align="center">
+  <img src="1kgraf.png" width="500">
+  <br>
+  <p><i>Resistencia a 1kOhm.</i></p>
+</div>
+
+Al ejecutar la simulación y cerrar el interruptor, observamos lo siguiente:
+1. **Curva de Carga:** El osciloscopio muestra una carga exponencial idéntica a la obtenida en MATLAB.
+2. **Medición de Tau ($\tau$):** Utilizando los cursores del osciloscopio, se midió el tiempo en el que el capacitor alcanza los **3.16V**. En el Caso B, este valor se alcanza a los **470ms**, validando con precisión el modelo teórico.
+3. **Estado Estacionario:** Se observa que la señal se estabiliza completamente en los 5V después de transcurridos los $5\tau$ calculados.
+
+**Conclusión de la Simulación:** Los resultados en Proteus son consistentes con el análisis de polos y la respuesta temporal previa. Esto confirma que el modelo de función de transferencia es una representación fiel de un circuito físico real.
+
+## 6. Preguntas de Análisis
+## ¿Cómo cambió la ubicación del polo en el plano $s$ al disminuir la resistencia en el Caso B?
+Al disminuir la resistencia de $10k\Omega$ (Caso A) a $1k\Omega$ (Caso B), el valor absoluto del polo ($|s| = 1/RC$) aumentó de $0.21$ a $2.12$. 
+* **Efecto Gráfico:** El polo se desplazó hacia la **izquierda**, alejándose del eje imaginario.
+* **Efecto Dinámico:** En los sistemas de primer orden, un polo más alejado del origen hacia el semiplano izquierdo indica una constante de tiempo $\tau$ más pequeña. Esto se traduce en una respuesta mucho más rápida, ya que el sistema disipa su transitorio con mayor velocidad.
+
+
+## 7. Conclusión del Proyecto
+
+Este ejercicio permitió validar que la estabilidad y la velocidad de un sistema de primer orden dependen directamente de la ubicación de sus polos. Mientras que un polo en el semiplano derecho generaría un sistema inestable (como se analizó en prácticas anteriores), un polo en el semiplano izquierdo garantiza que el capacitor alcance su carga final de manera controlada. La experimentación demostró que controlar la resistencia es una forma efectiva de sintonizar la velocidad de respuesta de un circuito RC.
