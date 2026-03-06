@@ -166,7 +166,7 @@ Para validar el modelo teórico del circuito RC, se implementó físicamente el 
 El osciloscopio mostró una **curva de carga exponencial**, característica de los sistemas RC de primer orden.
 
 <div align="center">
-  <img src="practico.png" width="500">
+  <img src="practico.jpeg" width="500">
   <br>
   <p><i>Resultado físico.</i></p>
 </div>
