@@ -143,13 +143,42 @@ Al ejecutar la simulación y cerrar el interruptor, observamos lo siguiente:
 
 **Conclusión de la Simulación:** Los resultados en Proteus son consistentes con el análisis de polos y la respuesta temporal previa. Esto confirma que el modelo de función de transferencia es una representación fiel de un circuito físico real.
 
-## 6. Preguntas de Análisis
+## 6. Práctica del Experimento
+
+Para validar el modelo teórico del circuito RC, se implementó físicamente el circuito utilizando una resistencia de **1 kΩ** y un capacitor de **470 μF**, alimentados con una fuente **DC de 5V**.
+
+### Materiales
+- Resistencia **1 kΩ**
+- Capacitor **470 μF**
+- Fuente **DC de 5V**
+- Protoboard y cables
+- Osciloscopio
+
+### Procedimiento
+
+1. Se conectó el circuito con **R = 1 kΩ** y **C = 470 μF**.
+2. Se aplicó una **entrada escalón de 5V** mediante un interruptor.
+3. Se midió el voltaje en el capacitor usando un **osciloscopio**.
+4. Se observó la curva de carga del capacitor a lo largo del tiempo.
+
+### Resultado Experimental
+
+El osciloscopio mostró una **curva de carga exponencial**, característica de los sistemas RC de primer orden.
+
+<div align="center">
+  <img src="practico.png" width="500">
+  <br>
+  <p><i>Resultado físico.</i></p>
+</div>
+
+El capacitor alcanzó aproximadamente el **63% del voltaje final** cerca del tiempo esperado según la constante de tiempo del sistema.
+## 7. Preguntas de Análisis
 ## ¿Cómo cambió la ubicación del polo en el plano $s$ al disminuir la resistencia en el Caso B?
 Al disminuir la resistencia de $10k\Omega$ (Caso A) a $1k\Omega$ (Caso B), el valor absoluto del polo ($|s| = 1/RC$) aumentó de $0.21$ a $2.12$. 
 * **Efecto Gráfico:** El polo se desplazó hacia la **izquierda**, alejándose del eje imaginario.
 * **Efecto Dinámico:** En los sistemas de primer orden, un polo más alejado del origen hacia el semiplano izquierdo indica una constante de tiempo $\tau$ más pequeña. Esto se traduce en una respuesta mucho más rápida, ya que el sistema disipa su transitorio con mayor velocidad.
 
 
-## 7. Conclusión del Proyecto
+## 8. Conclusión del Proyecto
 
 Este ejercicio permitió validar que la estabilidad y la velocidad de un sistema de primer orden dependen directamente de la ubicación de sus polos. Mientras que un polo en el semiplano derecho generaría un sistema inestable (como se analizó en prácticas anteriores), un polo en el semiplano izquierdo garantiza que el capacitor alcance su carga final de manera controlada. La experimentación demostró que controlar la resistencia es una forma efectiva de sintonizar la velocidad de respuesta de un circuito RC.
